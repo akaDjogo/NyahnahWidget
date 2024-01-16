@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>greeting2</title>
-
     <style>
         /* CSS RESETS */
         body {
@@ -13,49 +12,61 @@
             line-height: 1.6;
             margin: 0;
         }
-
         h1 {
             margin-top: 0;
         }
-
         /* CSS START */
         .full-table {
             display: table;
             height: 100vh;
             width: 100%;
         }
-
         .table-cell {
             display: table-cell;
             vertical-align: middle;
             text-align: center;
         }
-
         .card {
             padding: 10px 25px 10px 25px;
             border-radius: 10px;
-            background-image: url('https://cdn.discordapp.com/attachments/1137149516173287605/1196876095933382786/Background-com-Sombra-Widget.png?ex=65b938ba&is=65a6c3ba&hm=0b81ceff73d2a4c77a8a8765ba1e0fbefa95ad20a7d0178e0f5b6047fba6ab09&'); /* Substitua 'URL_DA_SUA_IMAGEM' pela URL real da sua imagem */
-            background-size: cover;
+            background-image: url('https://cdn.discordapp.com/attachments/1137149516173287605/1196552992564981902/Ceu-Widget-Background.png?ex=65b80bd0&is=65a596d0&hm=04374871e84819d72c718ae6172ab64fbf37a412444ecb9646d5b4e7c724b5bd&'); /* Substitua 'URL_DA_SUA_IMAGEM' pela URL real da sua imagem */
+            background-size: cover; /* Garante que a imagem cubra todo o elemento */
             color: #fff;
             display: inline-block;
             box-shadow: 2px 2px 1px 0px #402c4c;
             transition: background 0.3s ease;
         }
-
         .card:hover {
             margin-top: 2px;
             box-shadow: none;
             background: #402c4c;
             transition: background 0.3s ease;
         }
-
-        .clock,
-        .time,
-        .date,
+        .clock {
+            display: inline;
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2em;
+        }
+        .time {
+            display: inline;
+            min-width: 37px;
+        }
+        .colon {
+            font-size: 1.1em;
+            display: inline-block;
+        }
+        .date {
+            display: inline;
+            min-width: 162px;
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2em;
+            padding-right: 30px;
+        }
         .greet {
+            display: inline;
             font-family: 'Dancing Script', cursive;
             font-size: 2rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 1.0);
+            padding-right: 30px;
         }
     </style>
 </head>
@@ -75,7 +86,6 @@
             </div>
         </div>
     </div>
-
     <script>
         function date() {
             var today = new Date();
@@ -91,17 +101,14 @@
             var month = months[today.getMonth()];
             document.getElementById('date').innerHTML = dayOfWeek + ", " + today.getDate() + " de " + month + " de " + today.getFullYear();
         }
-
         function clock() {
             var today = new Date();
             var hour = zeros(today.getHours());
             var minutes = zeros(today.getMinutes());
             var seconds = zeros(today.getSeconds());
-
             document.getElementById('hour').innerHTML = hour;
             document.getElementById('min').innerHTML = minutes;
             document.getElementById('sec').innerHTML = seconds;
-
             var hrs = today.getHours();
             var greet;
             if (hrs < 12)
@@ -110,20 +117,16 @@
                 greet = 'Boa Tarde, Nah! ';
             else if (hrs >= 18 && hrs <= 24)
                 greet = 'Boa Noite, Nah!  ';
-
             document.getElementById('greet').innerHTML = greet;
         }
-
         function zeros(num) {
             return num < 10 ? '0' + num : num;
         }
-
         function dateTime() {
             date();
             clock();
             setInterval(clock, 1000);
         }
-
         dateTime();
     </script>
 </body>
