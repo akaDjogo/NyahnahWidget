@@ -6,57 +6,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>greeting2</title>
     <style>
-        /* CSS RESETS */
         body {
             background-color: #191919;
-            line-height: 1.6;
             margin: 0;
+            line-height: 1.6;
         }
-        h1 {
-            margin-top: 0;
-        }
-        /* CSS START */
+
         .full-table {
             display: table;
             height: 100vh;
             width: 100%;
         }
+
         .table-cell {
             display: table-cell;
             vertical-align: middle;
             text-align: center;
         }
+
         .card {
-            padding: 10px 25px 10px 25px;
+            box-sizing: border-box;
+            padding: 10px 25px;
             border-radius: 10px;
-            background-image: url('https://i.postimg.cc/HWf1CzjS/Matt.png'); /* Substitua 'URL_DA_SUA_IMAGEM' pela URL real da sua imagem */
-            background-size: cover; /* Garante que a imagem cubra todo o elemento */
-            color: #fff;
+
+            /* Borda dourada por dentro */
+            border: 3px solid #FFA500;
+
+            /* Fundo vermelho + imagem */
+            background-color: #a02020;
+            background-image: url('https://i.postimg.cc/HWf1CzjS/Matt.png');
+            background-size: cover;
+            background-blend-mode: multiply;
+
+            /* Texto */
+            color: #ffffff;
+
             display: inline-block;
-            box-shadow: 2px 2px 0px 0px #000000;
-            transition: background 0.3s ease;
+
+            /* Sombra forte preta */
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.8);
+
+            transition: background-color 0.3s ease;
         }
+
         .card:hover {
             margin-top: 2px;
-            box-shadow: none;
-            background: #000000;
-            transition: background 0.3s ease;
+            background-color: #8b1a1a;
+            transition: background-color 0.3s ease;
         }
-        .clock {
+
+        .greet {
             display: inline;
-            font-family: 'Bebas Neue', cursive;
-            font-size: 2em;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            padding-right: 30px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 1.0);
         }
-        .time {
-            display: inline;
-            min-width: 37px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 1.0);
-        }
-        .colon {
-            font-size: 1.1em;
-            display: inline-block;
-        }
+
         .date {
             display: inline;
             min-width: 162px;
@@ -65,12 +71,22 @@
             padding-right: 30px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 1.0);
         }
-        .greet {
+
+        .clock {
             display: inline;
-            font-family: 'Dancing Script', cursive;
-            font-size: 2rem;
-            padding-right: 30px;
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2em;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 1.0);
+        }
+
+        .time, .colon {
+            display: inline;
+            color: #ffffff;
+        }
+
+        .colon {
+            font-size: 1.1em;
+            display: inline-block;
         }
     </style>
 </head>
@@ -92,45 +108,48 @@
     </div>
     <script>
         function date() {
-            var today = new Date();
-            var daysOfWeek = [
+            const today = new Date();
+            const daysOfWeek = [
                 "Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira",
                 "Quinta-feira", "Sexta-feira", "Sábado"
             ];
-            var dayOfWeek = daysOfWeek[today.getDay()];
-            var months = [
+            const months = [
                 "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
                 "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
             ];
-            var month = months[today.getMonth()];
-            document.getElementById('date').innerHTML = dayOfWeek + ", " + today.getDate() + " de " + month + " de " + today.getFullYear();
+            const dayOfWeek = daysOfWeek[today.getDay()];
+            const month = months[today.getMonth()];
+            document.getElementById('date').innerHTML =
+                dayOfWeek + ", " + today.getDate() + " de " + month + " de " + today.getFullYear();
         }
+
         function clock() {
-            var today = new Date();
-            var hour = zeros(today.getHours());
-            var minutes = zeros(today.getMinutes());
-            var seconds = zeros(today.getSeconds());
+            const today = new Date();
+            const hour = zeros(today.getHours());
+            const minutes = zeros(today.getMinutes());
+            const seconds = zeros(today.getSeconds());
             document.getElementById('hour').innerHTML = hour;
             document.getElementById('min').innerHTML = minutes;
             document.getElementById('sec').innerHTML = seconds;
-            var hrs = today.getHours();
-            var greet;
-            if (hrs < 12)
-                greet = 'Bom Dia, Matt!  ';
-            else if (hrs >= 12 && hrs < 18)
-                greet = 'Boa Tarde, Matt! ';
-            else if (hrs >= 18 && hrs <= 24)
-                greet = 'Boa Noite, Matt!  ';
+
+            const hrs = today.getHours();
+            let greet;
+            if (hrs < 12) greet = 'Bom Dia, Matt!';
+            else if (hrs < 18) greet = 'Boa Tarde, Matt!';
+            else greet = 'Boa Noite, Matt!';
             document.getElementById('greet').innerHTML = greet;
         }
+
         function zeros(num) {
             return num < 10 ? '0' + num : num;
         }
+
         function dateTime() {
             date();
             clock();
             setInterval(clock, 1000);
         }
+
         dateTime();
     </script>
 </body>
